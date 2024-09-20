@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react';
+import { PluginOption } from 'vite';
 
-export function createplugins(isbuild: boolean) {
-    const vitePlugins: (pluginoption | pluginoption[])[] = [react()];
-    vitePlugins;
+export function createPlugins(isBuild: boolean) {
+    const vitePlugins: (PluginOption | PluginOption[])[] = [react()];
     return vitePlugins;
 }

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '@/page/Root/app';
-import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/naturoVotePoll';
+import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/narutoVotePoll';
 
-const createmyroutercontent = () => {
+const createMyRouterContent = () => {
     const rootRoutersList = [
         {
             path: '/',

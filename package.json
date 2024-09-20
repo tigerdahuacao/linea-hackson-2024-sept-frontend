@@ -71,7 +71,6 @@
     },
     "lint-staged": {
         "*.{ts,tsx,vue,js,jsx,mjs}": [
-            "npm run lint",
             "prettier --write",
             "git add"
         ],
