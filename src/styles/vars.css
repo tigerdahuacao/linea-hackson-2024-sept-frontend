@@ -1,0 +1,12 @@
+:root {
+    /* 标准字体大小 */
+    --font-size-base: 0.875rem;
+
+    /* 标准字体 */
+    --font-family-standard: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', simsun,
+        helvetica, arial, sans-serif, monospace;
+
+    /* 代码字体 */
+    --font-family-firacode: 'Fira Code', 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei',
+        simsun, helvetica, arial, sans-serif, monospace;
+}

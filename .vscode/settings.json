@@ -1,0 +1,24 @@
+{
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "postcss.validate": false,
+    "emmet.includeLanguages": {
+        "postcss": "css"
+    },
+    "stylelint.enable": true,
+    "stylelint.snippet": ["css", "scss", "less", "postcss"],
+    "stylelint.validate": ["css", "scss", "less", "postcss"],
+    "javascript.preferences.importModuleSpecifier": "project-relative",
+    "typescript.suggest.jsdoc.generateReturns": false,
+    "stylelint.packageManager": "pnpm",
+    "npm.packageManager": "pnpm",
+    "cSpell.words": [
+        "naruto"
+    ]
+}

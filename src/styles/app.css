@@ -1,0 +1,9 @@
+html,
+body,
+#root {
+    @apply tw-h-[100vh] tw-w-full tw-flex tw-p-0 tw-m-0;
+}
+
+body {
+    @apply tw-bg-[url(@/assets/images/background/tokyo-1.jpg)];
+}
