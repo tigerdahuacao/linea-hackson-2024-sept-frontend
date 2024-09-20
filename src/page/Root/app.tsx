@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import $styles from '@/page/containerCss/container.module.css';
+import $styles from '../containerCss/container.module.scss';
 
 const App: FC = () => {
     return (
@@ -13,7 +13,7 @@ const App: FC = () => {
                 <div className="tw-flex tw-items-center tw-flex-col">
                     <div className="tw-flex-auto tw-my-5">
                         <div className="tw-text-neutral-800 ">
-                            <div className="tw-w-auto  tw-m-4 tw-bg-yellow-400 tw-rounded-full tw-flex tw-flex-row tw-p-3">
+                            <div className="tw-w-auto tw-m-4 tw-bg-yellow-400 tw-rounded-full tw-flex tw-flex-row tw-p-3">
                                 <Avatar alt="NARUTO" src="/images/anime/naruto/naruto-1.jpg" />
                                 <img
                                     className="tw-h-8 tw-object-contain tw-inline-block"

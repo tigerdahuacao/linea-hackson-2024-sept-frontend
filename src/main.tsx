@@ -3,6 +3,6 @@ import { RouterProvider } from 'react-router-dom';
 
 import router from './routes/createRoute';
 
-import './styles/index.css';
+import './styles/index.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
