@@ -13,6 +13,7 @@ export const createConfig = (params: ConfigEnv, configure?: Configure): UserConf
             resolve: {
                 alias: {
                     '@': resolve(__dirname, '../src'),
+                    '@styles': resolve(__dirname, '../src/styles'),
                 },
             },
             css: {
