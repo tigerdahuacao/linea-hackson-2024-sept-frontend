@@ -38,7 +38,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": ["src"]

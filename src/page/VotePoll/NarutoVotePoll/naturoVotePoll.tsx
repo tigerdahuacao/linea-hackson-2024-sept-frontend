@@ -1,6 +1,5 @@
+import $styles from '@styles/modules/container.module.scss';
 import { FC } from 'react';
-
-import $styles from '@/page/containerCss/container.module.scss';
 
 const NarutoVotePoll: FC = () => {
     return (

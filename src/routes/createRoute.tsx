@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import Overview from '@/page/Overview/Overview';
 import App from '@/page/Root/app';
 import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/narutoVotePoll';
 
@@ -8,10 +9,16 @@ const createMyRouterContent = () => {
         {
             path: '/',
             element: <App />,
-        },
-        {
-            path: '/vote-for-naruto',
-            element: <NarutoVotePoll />,
+            children: [
+                {
+                    index: true,
+                    element: <Overview />,
+                },
+                {
+                    path: '/vote-for-naruto',
+                    element: <NarutoVotePoll />,
+                },
+            ],
         },
     ];
 
