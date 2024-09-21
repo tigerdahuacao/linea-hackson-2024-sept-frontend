@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Overview from '@/page/Overview/Overview';
+import Profile from '@/page/Profile/Profile';
 import App from '@/page/Root/app';
 import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/narutoVotePoll';
 
@@ -17,6 +18,10 @@ const createMyRouterContent = () => {
                 {
                     path: '/vote-for-naruto',
                     element: <NarutoVotePoll />,
+                },
+                {
+                    path: '/profile',
+                    element: <Profile />,
                 },
             ],
         },
