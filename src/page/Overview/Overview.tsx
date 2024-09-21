@@ -1,39 +1,74 @@
-import { Avatar } from '@mui/material';
-import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { FC, useContext, useEffect, useRef } from 'react';
+
+import { ScrollContext } from '../Root/AppContainer';
 
 const Overview: FC = () => {
-    const navigate = useNavigate();
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const handleScroll = useContext(ScrollContext);
 
     const handleGoToVote = () => {
-        navigate('/vote-for-naruto');
+        handleScroll(window.innerHeight);
     };
 
+    useEffect(() => {
+        const button = buttonRef.current;
+        if (button) {
+            const textWrapper = button.querySelector('.text-wrapper');
+            const hoverText = button.querySelector('.hover-text');
+
+            gsap.set(hoverText, { yPercent: 100 });
+
+            const floatAnimation = gsap.to(button, {
+                y: -10,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut',
+            });
+
+            const handleMouseEnter = () => {
+                gsap.to(textWrapper, { yPercent: -100, duration: 0.3, ease: 'power2.out' });
+                floatAnimation.pause();
+            };
+
+            const handleMouseLeave = () => {
+                gsap.to(textWrapper, { yPercent: 0, duration: 0.3, ease: 'power2.out' });
+                floatAnimation.play();
+            };
+
+            button.addEventListener('mouseenter', handleMouseEnter);
+            button.addEventListener('mouseleave', handleMouseLeave);
+
+            // 清理函数
+            return () => {
+                button.removeEventListener('mouseenter', handleMouseEnter);
+                button.removeEventListener('mouseleave', handleMouseLeave);
+                floatAnimation.kill();
+            };
+        }
+        return undefined;
+    }, []);
+
     return (
-        <div className="tw-bg-white tw-shadow-md tw-rounded-lg tw-p-5 tw-m-5 tw-min-w-[20rem]">
-            <h2 className="tw-text-center tw-font-extrabold">Choose Your Project</h2>
-            <div className="tw-flex tw-items-center tw-flex-col">
-                <div className="tw-flex-auto tw-my-5">
-                    <div className="tw-text-neutral-800 ">
-                        <div className="tw-w-auto tw-m-4 tw-bg-yellow-400 tw-rounded-full tw-flex tw-flex-row tw-p-3">
-                            <Avatar alt="NARUTO" src="/images/anime/naruto/naruto-1.jpg" />
-                            <img
-                                className="tw-h-8 tw-object-contain tw-inline-block"
-                                src="/images/anime/naruto/naruto-1.jpg"
-                                alt="img"
-                            />
-                            <button
-                                className="tw-w-full tw-text-gray-800 tw-py-2 tw-px-4 tw-font-bold hover:tw-bg-yellow-500 tw-rounded-full"
-                                onClick={handleGoToVote}
-                            >
-                                <span>Go To NARUTO vote poll</span>
-                            </button>
-                        </div>
+        <div className="tw-h-svh tw-w-svw">
+            <div className="tw-h-svh tw-w-svw tw-flex tw-justify-center tw-items-end tw-snap-center">
+                <button
+                    ref={buttonRef}
+                    className="tw-relative tw-w-60 tw-h-14 tw-font-bold tw-py-2 tw-px-4 tw-rounded-full tw-shadow-md tw-border-2 tw-border-white tw-mb-40 tw-overflow-hidden"
+                    onClick={handleGoToVote}
+                >
+                    <div className="text-wrapper tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0">
+                        <span className="default-text tw-absolute tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-text-sm tw-text-pink-default tw-bg-white">
+                            Go Vote Now
+                        </span>
+                        <span className="hover-text tw-absolute tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-text-white tw-bg-pink-default tw-text-sm">
+                            Let&apos;s Go!!!!!!
+                        </span>
                     </div>
-                    <div className="tw-text-neutral-800" />
-                    <div className="tw-text-neutral-800" />
-                </div>
+                </button>
             </div>
+            <div className="tw-h-svh tw-w-svw tw-snap-center">111</div>
         </div>
     );
 };

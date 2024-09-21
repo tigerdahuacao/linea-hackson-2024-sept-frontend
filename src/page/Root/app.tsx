@@ -55,7 +55,7 @@ const App: FC = () => {
             </header>
             <main
                 ref={mainRef}
-                className="tw-w-full tw-relative tw-flex tw-flex-auto tw-flex-wrap tw-items-center tw-justify-center tw-pt-14"
+                className="tw-w-full tw-relative tw-flex tw-flex-auto tw-flex-wrap tw-items-center tw-justify-center"
             >
                 <Outlet />
             </main>
