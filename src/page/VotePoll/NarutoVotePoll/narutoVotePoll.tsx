@@ -1,6 +1,8 @@
+import PopUp from '@/components/PopUp/PopUp';
+import { Button } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
 import $styles from '@styles/modules/container.module.scss';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 const NarutoVotePoll: FC = () => {
     const chartSetting = {
@@ -18,6 +20,8 @@ const NarutoVotePoll: FC = () => {
     }
 
     const xLabels = ['ナルト', 'イタチ', 'サスケ'];
+
+    const [openVotePopUp, setOpenVotePopUp] = useState(false);
     return (
         <div className={$styles.app}>
             <div className={$styles.container}>
@@ -53,7 +57,21 @@ const NarutoVotePoll: FC = () => {
                     borderRadius={30}
                     {...chartSetting}
                 />
+                <div className="tw-flex tw-justify-end">
+                    <Button
+                        onClick={() => {
+                            setOpenVotePopUp(true);
+                        }}
+                        variant="contained"
+                    >
+                        Vote!
+                    </Button>
+                </div>
             </div>
+
+            <PopUp openPopUp={openVotePopUp} setOpenPopUp={setOpenVotePopUp}>
+                123
+            </PopUp>
         </div>
     );
 };
