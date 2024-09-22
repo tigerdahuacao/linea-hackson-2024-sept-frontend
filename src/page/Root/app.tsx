@@ -1,5 +1,7 @@
+import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { FC, useEffect, useRef } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FC, useRef } from 'react';
 
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -26,11 +28,13 @@ const tabs = [
     },
 ];
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 const App: FC = () => {
     const location = useLocation();
     const mainRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         const mainElement = mainRef.current;
 
         if (mainElement) {

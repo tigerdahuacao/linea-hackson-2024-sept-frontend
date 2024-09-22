@@ -1,6 +1,7 @@
+import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { createContext, FC, ReactNode, useCallback, useEffect, useRef } from 'react';
+import { createContext, FC, ReactNode, useCallback, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -17,7 +18,7 @@ const AppContainer: FC<AppContainerProps> = ({ bgText, children }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
 
-    useEffect(() => {
+    useGSAP(() => {
         const bgTextElement = bgTextRef.current;
         const containerElement = containerRef.current;
 
