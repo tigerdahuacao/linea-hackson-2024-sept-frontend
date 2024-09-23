@@ -19,14 +19,13 @@ module.exports = {
             },
             backgroundImage: {
                 'custom-gradient': `
-                  linear-gradient(0deg, #ffdde6, #ffdde6),
+                  linear-gradient(0deg, #fffbfb, #fffbfb),
                   radial-gradient(90.01% 33.44% at 22.03% 60.33%, rgba(255, 169, 200, 0.6) 0%, rgba(255, 169, 200, 0) 100%),
                   linear-gradient(224.58deg, #ef556c 21.82%, rgba(239, 85, 108, 0) 51.99%)
                 `,
             },
-            backgroundColor:{
-                'custom-popup-bg':'rgb(110 48 75 0.6)'
-
+            backgroundColor: {
+                'custom-popup-bg': 'rgb(110 48 75 0.6)',
             },
             colors: {
                 pink: {
