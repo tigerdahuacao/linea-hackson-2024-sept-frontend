@@ -1,19 +1,22 @@
 import { FC } from 'react';
 
+import SnapWrapper from '@/components/ScrollSnap/SnapWrapper';
+
+import SnapAlign from '../../components/ScrollSnap/SnapAlign';
+
 import HomePage from './HomePage';
-import SnapWrapper from './SnapWrapper';
 import VoteList from './VoteLIst';
 
 const Overview: FC = () => {
     return (
-        <div className="tw-h-svh tw-w-svw">
-            <SnapWrapper>
+        <SnapWrapper>
+            <SnapAlign>
                 <HomePage />
-            </SnapWrapper>
-            <SnapWrapper>
+            </SnapAlign>
+            <SnapAlign>
                 <VoteList />
-            </SnapWrapper>
-        </div>
+            </SnapAlign>
+        </SnapWrapper>
     );
 };
 

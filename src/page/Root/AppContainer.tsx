@@ -1,3 +1,4 @@
+import SnapMandatory from '@/components/ScrollSnap/SnapMandatory';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -53,9 +54,9 @@ const AppContainer: FC<AppContainerProps> = ({ bgText, children }) => {
 
     return (
         <ScrollContext.Provider value={handleScroll}>
-            <div
+            <SnapMandatory
                 ref={containerRef}
-                className="tw-h-full tw-w-full tw-relative tw-bg-custom-gradient tw-before-noise tw-overflow-hidden tw-snap-y tw-snap-mandatory"
+                className="tw-h-full tw-w-full tw-relative tw-bg-custom-gradient tw-before-noise tw-overflow-hidden"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {bgText ? (
@@ -70,7 +71,7 @@ const AppContainer: FC<AppContainerProps> = ({ bgText, children }) => {
                     </div>
                 ) : null}
                 {children}
-            </div>
+            </SnapMandatory>
         </ScrollContext.Provider>
     );
 };

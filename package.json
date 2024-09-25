@@ -16,6 +16,7 @@
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
         "@gsap/react": "^2.1.1",
+        "@iconify/react": "^5.0.2",
         "@mui/icons-material": "^6.1.1",
         "@mui/material": "^6.1.1",
         "@mui/x-charts": "^7.18.0",

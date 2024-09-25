@@ -156,7 +156,7 @@ const VoteList: FC = () => {
     return (
         <div
             ref={scrollContainerRef}
-            className="tw-h-full tw-w-full tw-flex tw-pt-14 tw-overflow-y-auto"
+            className="tw-h-full tw-w-full tw-flex tw-overflow-y-auto"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
             <div className="tw-relative tw-m-auto tw-min-w-[80vw] tw-pt-10">
