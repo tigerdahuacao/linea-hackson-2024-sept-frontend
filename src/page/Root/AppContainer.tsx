@@ -1,9 +1,10 @@
-import SnapMandatory from '@/components/ScrollSnap/SnapMandatory';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { createContext, FC, ReactNode, useCallback, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import SnapMandatory from '@/components/ScrollSnap/SnapMandatory';
 
 gsap.registerPlugin(ScrollToPlugin);
 

@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material';
-import { axisClasses } from '@mui/x-charts';
 import { BarChart } from '@mui/x-charts/BarChart';
 import $styles from '@styles/modules/container.module.scss';
 import { FC, useState } from 'react';
@@ -18,11 +17,6 @@ const NarutoVotePoll: FC = () => {
         series: [{ dataKey: 'voteNumber', color: 'rgb(252 211 77)', valueFormatter }],
         height: 400,
         barSize: 40,
-        sx: {
-            [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
-                transform: 'translateX(-10px)',
-            },
-        },
     };
 
     function valueFormatter(value: number | null) {
@@ -47,14 +41,8 @@ const NarutoVotePoll: FC = () => {
     const [openVotePopUp, setOpenVotePopUp] = useState(false);
     return (
         <SnapWrapper>
-            <SnapAlign className="tw-relative tw-flex tw-items-center tw-justify-center tw-bg-orange-400">
-                <div
-                    className="tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-w-1/3 tw-bg-contain tw-bg-no-repeat tw-bg-right tw-opacity-30"
-                    style={{
-                        backgroundImage: "url('/images/anime/naruto/naruto-1-transparent.png')",
-                    }}
-                />
-                <Stack className="tw-min-w-[20rem] tw-min-h-[60vh] tw-p-8 tw-m-5 tw-rounded-2xl tw-justify-between tw-bg-white tw-shadow-lg">
+            <SnapAlign className="tw-flex tw-items-center tw-justify-center">
+                <Stack className="tw-relative tw-min-w-[20rem] tw-min-h-[60vh] tw-p-8 tw-m-5 tw-text-white tw-rounded-2xl tw-justify-between tw-bg-orange-300 tw-shadow-md tw-shadow-orange-300">
                     <div>
                         <span className="tw-text-3xl tw-font-bold tw-p-2">
                             Please Vote for your Favorite NARUTO Characters
@@ -65,7 +53,7 @@ const NarutoVotePoll: FC = () => {
                             今回の募集では、「説明文字 Notionから」
                         </p>
                     </div>
-                    <div className="tw-px-2">
+                    <div className="tw-px-2 tw-z-10">
                         <BarChart
                             dataset={dataset}
                             xAxis={[
@@ -79,6 +67,12 @@ const NarutoVotePoll: FC = () => {
                             {...chartSetting}
                         />
                     </div>
+                    <div
+                        className="tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-w-1/3 tw-bg-contain tw-bg-no-repeat tw-bg-right tw-opacity-30"
+                        style={{
+                            backgroundImage: "url('/images/anime/naruto/naruto-1-transparent.png')",
+                        }}
+                    />
                 </Stack>
             </SnapAlign>
             <SnapAlign>
