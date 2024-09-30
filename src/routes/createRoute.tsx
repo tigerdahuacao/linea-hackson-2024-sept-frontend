@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Overview from '@/page/Overview/Overview';
 import Profile from '@/page/Profile/Profile';
 import App from '@/page/Root/app';
+import Store from '@/page/Store/Store';
 import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/NarutoVotePoll';
 
 const createMyRouterContent = () => {
@@ -22,6 +23,10 @@ const createMyRouterContent = () => {
                 {
                     path: '/profile',
                     element: <Profile />,
+                },
+                {
+                    path: '/store',
+                    element: <Store />,
                 },
             ],
         },

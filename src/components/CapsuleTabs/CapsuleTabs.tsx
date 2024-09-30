@@ -67,9 +67,7 @@ const CapsuleTabs: FC<CapsuleTabsProps> = ({ tabs, defaultTab = tabs[0]?.value, 
 
     useEffect(() => {
         const currentTab = tabs.find((t) => t.path === location.pathname);
-        if (currentTab) {
-            setTab(currentTab.value);
-        }
+        setTab(currentTab?.value || '');
     }, [location, tabs]);
 
     const handleTabChange = (_: React.SyntheticEvent, value: string) => {
