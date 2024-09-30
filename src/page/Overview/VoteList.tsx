@@ -10,7 +10,7 @@ import {
     shinomiyaImg,
 } from '@/assets/images/anime/2024/09';
 
-import AnimationButon from '@/components/Button/AnimationButon';
+import AnimationButton from '@/components/Button/AnimationButton';
 
 interface CharacterListType {
     name: string;
@@ -45,7 +45,7 @@ const CardList = forwardRef<HTMLDivElement, { list: CharacterListType[] }>(({ li
                                 <span className="tw-text-xl tw-font-bold">{item.name}</span>
                                 <span className="tw-text-xs">Vote Number: {item.voteNum}</span>
                             </Stack>
-                            <AnimationButon h={12} w={36} text="Vote" />
+                            <AnimationButton h={12} w={36} text="Vote" />
                         </Stack>
                     </Stack>
                 );

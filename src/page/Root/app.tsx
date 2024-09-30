@@ -31,6 +31,12 @@ const tabs = [
         value: 'vote',
         path: '/vote-for-naruto',
     },
+    // For show an display error
+    {
+        label: 'Vote-old',
+        value: 'vote-old',
+        path: '/vote-for-naruto-old',
+    },
     {
         label: 'Profile',
         value: 'profile',

@@ -5,6 +5,7 @@ import Profile from '@/page/Profile/Profile';
 import App from '@/page/Root/app';
 import Store from '@/page/Store/Store';
 import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/NarutoVotePoll';
+import NarutoVotePollArchived from '@/page/VotePoll/NarutoVotePoll/Archived/NarutoVotePollArchived';
 
 const createMyRouterContent = () => {
     const rootRoutersList = [
@@ -19,6 +20,10 @@ const createMyRouterContent = () => {
                 {
                     path: '/vote-for-naruto',
                     element: <NarutoVotePoll />,
+                },
+                {
+                    path: '/vote-for-naruto-old',
+                    element: <NarutoVotePollArchived />,
                 },
                 {
                     path: '/profile',

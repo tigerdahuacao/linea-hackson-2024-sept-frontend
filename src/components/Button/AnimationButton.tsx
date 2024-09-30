@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { FC, useRef } from 'react';
 
-const AnimationButon: FC<{
+const AnimationButton: FC<{
     h?: number;
     w?: number;
     text: string;
@@ -73,4 +73,4 @@ const AnimationButon: FC<{
     );
 };
 
-export default AnimationButon;
+export default AnimationButton;

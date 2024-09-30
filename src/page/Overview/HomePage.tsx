@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import AnimationButon from '@/components/Button/AnimationButon';
+import AnimationButton from '@/components/Button/AnimationButton';
 
 import { ScrollContext } from '../Root/AppContainer';
 
@@ -13,7 +13,7 @@ const HomePage: FC = () => {
 
     return (
         <div className="tw-h-full tw-flex tw-justify-center tw-items-end tw-pb-40">
-            <AnimationButon
+            <AnimationButton
                 enableAnimation
                 text="Go Vote Now"
                 switchText="Let's Go!!!!!!"
