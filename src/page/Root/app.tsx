@@ -12,10 +12,13 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains';
 
+import StoreButton from '@/components/Button/StoreButton';
 import WalletButton from '@/components/Button/WalletButton';
 import CapsuleTabs from '@/components/CapsuleTabs/CapsuleTabs';
 
 import AppContainer from './AppContainer';
+
+import { Stack } from '@mui/material';
 
 const tabs = [
     {
@@ -66,21 +69,30 @@ const App: FC = () => {
             <WagmiProvider config={config}>
                 <QueryClientProvider client={queryClient}>
                     <RainbowKitProvider>
-                        <header className="tw-fixed tw-flex tw-w-full tw-z-50 tw-justify-between tw-p-2">
+                        <Stack
+                            direction="row"
+                            className="tw-fixed tw-w-full tw-z-50 tw-justify-between tw-p-2"
+                        >
                             <div className="tw-w-1/3" />
-                            <div className="tw-w-1/3 tw-flex tw-justify-center">
+                            <Stack direction="row" className="tw-w-1/3 tw-justify-center">
                                 <CapsuleTabs tabs={tabs} />
-                            </div>
-                            <div className="tw-w-1/3 tw-flex tw-justify-end">
+                            </Stack>
+                            <Stack
+                                direction="row"
+                                spacing={2}
+                                className="tw-w-1/3 tw-items-center tw-justify-end"
+                            >
+                                <StoreButton />
                                 <WalletButton />
-                            </div>
-                        </header>
-                        <main
+                            </Stack>
+                        </Stack>
+                        <Stack
                             ref={mainRef}
-                            className="tw-w-full tw-relative tw-flex tw-flex-auto tw-flex-wrap tw-items-center tw-justify-center"
+                            direction="row"
+                            className="tw-w-full tw-relative tw-flex-auto tw-flex-wrap tw-items-center tw-justify-center"
                         >
                             <Outlet />
-                        </main>
+                        </Stack>
                     </RainbowKitProvider>
                 </QueryClientProvider>
             </WagmiProvider>

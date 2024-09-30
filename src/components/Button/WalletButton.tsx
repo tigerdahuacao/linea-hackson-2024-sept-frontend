@@ -36,19 +36,21 @@ const WalletButton = () => {
                         {(() => {
                             if (!connected) {
                                 return (
-                                    <CapsuleButton onClick={openConnectModal}>
-                                        <span className="tw-text-pink-default hover:tw-opacity-80 tw-transition-opacity">
-                                            Connect Wallet
-                                        </span>
+                                    <CapsuleButton
+                                        className="tw-text-pink-default hover:tw-opacity-80 tw-transition-opacity"
+                                        onClick={openConnectModal}
+                                    >
+                                        Connect Wallet
                                     </CapsuleButton>
                                 );
                             }
                             if (chain.unsupported) {
                                 return (
-                                    <CapsuleButton onClick={openConnectModal}>
-                                        <span className="tw-text-red-500 hover:tw-opacity-80 tw-transition-opacity">
-                                            Wrong network
-                                        </span>
+                                    <CapsuleButton
+                                        className="tw-text-red-500 hover:tw-opacity-80 tw-transition-opacity"
+                                        onClick={openConnectModal}
+                                    >
+                                        Wrong network
                                     </CapsuleButton>
                                 );
                             }
