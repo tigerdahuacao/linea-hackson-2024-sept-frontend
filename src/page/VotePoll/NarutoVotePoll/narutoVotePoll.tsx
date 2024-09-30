@@ -3,6 +3,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import $styles from '@styles/modules/container.module.scss';
 import { FC, useState } from 'react';
 
+import { naruto1TransparentImg } from '@/assets/images/anime/naruto';
 import PopUp from '@/components/PopUp/PopUp';
 import SnapAlign from '@/components/ScrollSnap/SnapAlign';
 import SnapWrapper from '@/components/ScrollSnap/SnapWrapper';
@@ -16,7 +17,7 @@ const NarutoVotePoll: FC = () => {
         ],
         series: [{ dataKey: 'voteNumber', color: 'rgb(252 211 77)', valueFormatter }],
         height: 400,
-        barSize: 40,
+        barsize: 40,
     };
 
     function valueFormatter(value: number | null) {
@@ -70,7 +71,7 @@ const NarutoVotePoll: FC = () => {
                     <div
                         className="tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-w-1/3 tw-bg-contain tw-bg-no-repeat tw-bg-right tw-opacity-30"
                         style={{
-                            backgroundImage: "url('/images/anime/naruto/naruto-1-transparent.png')",
+                            backgroundImage: `url(${naruto1TransparentImg})`,
                         }}
                     />
                 </Stack>

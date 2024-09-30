@@ -5,7 +5,7 @@ import SnapWrapper from '@/components/ScrollSnap/SnapWrapper';
 import SnapAlign from '../../components/ScrollSnap/SnapAlign';
 
 import HomePage from './HomePage';
-import VoteList from './VoteLIst';
+import VoteCCList from './VoteList';
 
 const Overview: FC = () => {
     return (
@@ -14,7 +14,7 @@ const Overview: FC = () => {
                 <HomePage />
             </SnapAlign>
             <SnapAlign>
-                <VoteList />
+                <VoteCCList />
             </SnapAlign>
         </SnapWrapper>
     );

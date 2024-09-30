@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Overview from '@/page/Overview/Overview';
 import Profile from '@/page/Profile/Profile';
 import App from '@/page/Root/app';
-import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/narutoVotePoll';
+import NarutoVotePoll from '@/page/VotePoll/NarutoVotePoll/NarutoVotePoll';
 
 const createMyRouterContent = () => {
     const rootRoutersList = [

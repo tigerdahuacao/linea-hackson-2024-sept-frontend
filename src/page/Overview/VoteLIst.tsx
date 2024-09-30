@@ -1,5 +1,14 @@
 import { Stack } from '@mui/material';
+
 import { FC, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import {
+    chitandaImg,
+    mashiroImg,
+    misakaImg,
+    rikkaImg,
+    shinomiyaImg,
+} from '@/assets/images/anime/2024/09';
 
 import AnimationButon from '@/components/Button/AnimationButon';
 
@@ -70,39 +79,39 @@ const ThumbnailList = forwardRef<
     );
 });
 
+const characterList = [
+    {
+        name: 'Eru Chitanda',
+        imgUrl: chitandaImg,
+        voteNum: 999,
+    },
+    {
+        name: 'Sakamoto Mashiro',
+        imgUrl: mashiroImg,
+        voteNum: 999,
+    },
+    {
+        name: 'Misaka Mikoto',
+        imgUrl: misakaImg,
+        voteNum: 999,
+    },
+    {
+        name: 'Rikka Takanashi',
+        imgUrl: rikkaImg,
+        voteNum: 999,
+    },
+    {
+        name: 'Shinomiya Kaguya',
+        imgUrl: shinomiyaImg,
+        voteNum: 999,
+    },
+];
+
 const VoteList: FC = () => {
     const [thumbnailTranslateY, setThumbnailTranslateY] = useState(0);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const cardListRef = useRef<HTMLDivElement>(null);
     const thumbnailListRef = useRef<HTMLDivElement>(null);
-
-    const characterList = [
-        {
-            name: 'Eru Chitanda',
-            imgUrl: '/public/images/anime/2024/09/chitanda.png',
-            voteNum: 999,
-        },
-        {
-            name: 'Sakamoto Mashiro',
-            imgUrl: '/public/images/anime/2024/09/mashiro.png',
-            voteNum: 999,
-        },
-        {
-            name: 'Misaka Mikoto',
-            imgUrl: '/public/images/anime/2024/09/misaka.png',
-            voteNum: 999,
-        },
-        {
-            name: 'Rikka Takanashi',
-            imgUrl: '/public/images/anime/2024/09/rikka.png',
-            voteNum: 999,
-        },
-        {
-            name: 'Shinomiya Kaguya',
-            imgUrl: '/public/images/anime/2024/09/shinomiya.png',
-            voteNum: 999,
-        },
-    ];
 
     const handleScroll = useCallback(() => {
         const scrollContainerElement = scrollContainerRef.current;

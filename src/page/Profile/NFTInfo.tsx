@@ -2,6 +2,17 @@ import { Stack } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { FC } from 'react';
 
+import {
+    naruto1,
+    naruto2,
+    naruto3,
+    naruto4,
+    naruto5,
+    naruto6,
+    naruto7,
+    naruto8,
+} from '@/assets/images/anime/NFT-images/naruto-images';
+
 import ProfileCard from './ProfileCard';
 
 const NFTInfo: FC = () => {
@@ -10,55 +21,49 @@ const NFTInfo: FC = () => {
             key: 'ntf1',
             name: 'NFT1',
             publishers: 'Publisher1',
-            imageUrl: '/images/anime/naruto/naruto-1.jpg',
+            imageUrl: naruto1,
         },
         {
             key: 'ntf2',
             name: 'NFT2',
             publishers: 'Publisher2',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto2,
         },
         {
             key: 'ntf3',
             name: 'NFT3',
             publishers: 'Publisher3',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto3,
         },
         {
             key: 'ntf4',
             name: 'NFT4',
             publishers: 'Publisher4',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto4,
         },
         {
             key: 'ntf5',
             name: 'NFT5',
             publishers: 'Publisher5',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto5,
         },
         {
             key: 'ntf6',
             name: 'NFT6',
             publishers: 'Publisher6',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto6,
         },
         {
             key: 'ntf7',
             name: 'NFT7',
             publishers: 'Publisher7',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto7,
         },
         {
             key: 'ntf8',
             name: 'NFT8',
             publishers: 'Publisher8',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
-        },
-        {
-            key: 'ntf9',
-            name: 'NFT9',
-            publishers: 'Publisher9',
-            imageUrl: '/images/anime/naruto/naruto-2.jpg',
+            imageUrl: naruto8,
         },
     ];
 
