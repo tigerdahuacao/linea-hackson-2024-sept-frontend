@@ -1,9 +1,13 @@
 import { Stack } from '@mui/material';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
+import { useAutoLogin } from '@/hooks/useAutoLogin';
+
 import CapsuleButton from './CapsuleButton';
 
 const WalletButton = () => {
+    const { isLoading } = useAutoLogin();
+
     return (
         <ConnectButton.Custom>
             {({
@@ -20,7 +24,9 @@ const WalletButton = () => {
                     ready &&
                     account &&
                     chain &&
-                    (!authenticationStatus || authenticationStatus === 'authenticated');
+                    (!authenticationStatus || authenticationStatus === 'authenticated') &&
+                    !isLoading;
+
                 return (
                     <div
                         className="tw-flex tw-items-center"

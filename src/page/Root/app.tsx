@@ -1,4 +1,5 @@
 import { useGSAP } from '@gsap/react';
+import { Stack } from '@mui/material';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -10,15 +11,13 @@ import { FC, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { WagmiProvider } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains';
+import { mainnet, lineaSepolia, linea, lineaTestnet } from 'wagmi/chains';
 
 import StoreButton from '@/components/Button/StoreButton';
 import WalletButton from '@/components/Button/WalletButton';
 import CapsuleTabs from '@/components/CapsuleTabs/CapsuleTabs';
 
 import AppContainer from './AppContainer';
-
-import { Stack } from '@mui/material';
 
 const tabs = [
     {
@@ -47,7 +46,7 @@ const tabs = [
 const config = getDefaultConfig({
     appName: 'Hello Web3',
     projectId: '11111',
-    chains: [mainnet, polygon, optimism, arbitrum, base],
+    chains: [mainnet, lineaSepolia, linea, lineaTestnet],
 });
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
