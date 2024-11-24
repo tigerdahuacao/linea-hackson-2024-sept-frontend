@@ -1,11 +1,10 @@
 import { SIGNATURE_MESSAGE_KEY } from '@/constants';
-
 import {
-    SignatureMessageParams,
-    SignatureMessageResult,
     LoginMutationData,
     LoginResponse,
-} from '../types/auth';
+    SignatureMessageParams,
+    SignatureMessageResult,
+} from '@/types/auth';
 
 export function getSignatureMessage({
     address,
@@ -34,10 +33,20 @@ export function getSignatureMessage({
 
 export async function loginUser(data: LoginMutationData): Promise<LoginResponse> {
     console.log('loginUser', data);
-    // 模拟 API 调用，返回一个 token
-    return new Promise((resolve) => {
-        resolve({ success: true, message: 'Login successful', token: 'sample_token_12345' });
-    });
+
+    debugger;
+    const envName = import.meta.env.VITE_ENV_NAME;
+    if (envName === 'mock') {
+        // 模拟 API 调用，返回一个 token
+        return new Promise((resolve) => {
+            resolve({ success: true, message: 'Login successful', token: 'sample_token_12345' });
+        });
+    } else if (envName === 'online') {
+        const data = await fetch(`${import.meta.env.VITE_SERVER_ENDPOINT_URL}/user/login`, {
+            method: 'POST',
+        });
+        return data.json();
+    }
 }
 
 export async function logoutUser(token: string): Promise<LoginResponse> {
