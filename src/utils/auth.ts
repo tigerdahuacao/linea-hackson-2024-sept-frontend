@@ -1,11 +1,21 @@
+import { VITE_ENV_NAME } from '@/config/env';
 import { SIGNATURE_MESSAGE_KEY } from '@/constants';
+
 import {
-    LoginMutationData,
-    LoginResponse,
     SignatureMessageParams,
     SignatureMessageResult,
+    LoginMutationData,
+    LoginResponse,
+    AuthError,
+    LogoutMutationData,
+    LogoutResponse,
 } from '@/types/auth';
 
+import { httpClient } from './http-client';
+
+/**
+ * Generates a signature message for authentication
+ */
 export function getSignatureMessage({
     address,
     chain,
@@ -31,28 +41,61 @@ export function getSignatureMessage({
     };
 }
 
-export async function loginUser(data: LoginMutationData): Promise<LoginResponse> {
-    console.log('loginUser', data);
+/**
+ * API endpoint for user login
+ */
+const API_ENDPOINTS = {
+    LOGIN: '/user/login',
+    LOGOUT: '/user/logout',
+} as const;
 
-    debugger;
-    const envName = import.meta.env.VITE_ENV_NAME;
-    if (envName === 'mock') {
-        // 模拟 API 调用，返回一个 token
-        return new Promise((resolve) => {
-            resolve({ success: true, message: 'Login successful', token: 'sample_token_12345' });
-        });
-    } else if (envName === 'online') {
-        const data = await fetch(`${import.meta.env.VITE_SERVER_ENDPOINT_URL}/user/login`, {
-            method: 'POST',
-        });
-        return data.json();
+/**
+ * Handles user login with signature verification
+ */
+export async function loginUser(data: LoginMutationData): Promise<LoginResponse> {
+    try {
+        if (VITE_ENV_NAME === 'mock') {
+            return {
+                success: true,
+                message: 'Login successful',
+                token: 'sample_token_12345',
+            };
+        }
+        if (VITE_ENV_NAME === 'online') {
+            const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGIN, data);
+            return httpResponse.data;
+        }
+        throw new Error('Invalid environment');
+    } catch (error) {
+        const authError = new Error('Login failed') as AuthError;
+        authError.code = 'AUTH_LOGIN_FAILED';
+        authError.details = { originalError: error };
+        throw authError;
     }
 }
 
-export async function logoutUser(token: string): Promise<LoginResponse> {
-    console.log('logoutUser', { token });
-    // 模拟 API 调用，使用 token
-    return new Promise((resolve) => {
-        resolve({ success: true, message: 'Logout successful' });
-    });
+/**
+ * Handles user logout
+ */
+export async function logoutUser({ token, user }: LogoutMutationData): Promise<LogoutResponse> {
+    try {
+        if (VITE_ENV_NAME === 'mock') {
+            return {
+                message: 'Logout successful',
+            };
+        }
+        if (VITE_ENV_NAME === 'online') {
+            const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGOUT, {
+                token,
+                user,
+            });
+            return httpResponse.data;
+        }
+        throw new Error('Invalid environment');
+    } catch (error) {
+        const authError = new Error('Logout failed') as AuthError;
+        authError.code = 'AUTH_LOGOUT_FAILED';
+        authError.details = { originalError: error };
+        throw authError;
+    }
 }

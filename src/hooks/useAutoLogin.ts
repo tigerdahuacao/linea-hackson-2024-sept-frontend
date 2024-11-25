@@ -1,10 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useCallback } from 'react';
-import { useAccount, useDisconnect, usePublicClient, useSignMessage } from 'wagmi';
 import { useLocalStorage } from 'react-use';
+import { Address } from 'viem';
+import { useAccount, useDisconnect, usePublicClient, useSignMessage } from 'wagmi';
+
 import { STORAGE_KEYS } from '@/constants';
-import { LoginMutationData, LoginResponse } from '../types/auth';
-import { getSignatureMessage, loginUser, logoutUser } from '../utils/auth';
+
+import {
+    LoginMutationData,
+    LoginResponse,
+    AuthError,
+    LogoutResponse,
+    LogoutMutationData,
+} from '@/types/auth';
+import { getSignatureMessage, loginUser, logoutUser } from '@/utils/auth';
 
 export function useAutoLogin() {
     const { address, chain, isConnected } = useAccount();
@@ -13,13 +22,18 @@ export function useAutoLogin() {
     const { disconnect } = useDisconnect();
     const [isLoggedIn, setIsLoggedIn] = useLocalStorage(STORAGE_KEYS.LOGIN_STATUS, false);
     const [authToken, setAuthToken] = useLocalStorage<string | null>(STORAGE_KEYS.AUTH_TOKEN, null);
+    const [storedAddress, setStoredAddress] = useLocalStorage<Address>(
+        STORAGE_KEYS.USER_ADDRESS,
+        null,
+    );
 
-    const loginMutation = useMutation<LoginResponse, Error, LoginMutationData>({
+    const loginMutation = useMutation<LoginResponse, AuthError, LoginMutationData>({
         mutationFn: loginUser,
-        onSuccess: (data) => {
-            if (data.success && data.token) {
+        onSuccess: (response) => {
+            if (response.token) {
                 setIsLoggedIn(true);
-                setAuthToken(data.token);
+                setAuthToken(response.token);
+                setStoredAddress(address);
             }
         },
         onError: (error) => {
@@ -28,7 +42,7 @@ export function useAutoLogin() {
         },
     });
 
-    const logoutMutation = useMutation<LoginResponse, Error, string>({
+    const logoutMutation = useMutation<LogoutResponse, AuthError, LogoutMutationData>({
         mutationFn: logoutUser,
         onSettled: handleLogout,
     });
@@ -37,15 +51,19 @@ export function useAutoLogin() {
         disconnect();
         setIsLoggedIn(false);
         setAuthToken(null);
+        setStoredAddress(null);
     }
 
     const logout = useCallback(() => {
         if (authToken) {
-            logoutMutation.mutate(authToken);
+            logoutMutation.mutate({
+                token: authToken,
+                user: storedAddress,
+            });
         } else {
             handleLogout();
         }
-    }, [authToken, logoutMutation]);
+    }, [authToken, logoutMutation, storedAddress]);
 
     const connectSuccess = useCallback(async () => {
         if (!address || !chain) {

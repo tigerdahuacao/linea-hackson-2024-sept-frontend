@@ -22,6 +22,9 @@ export const createConfig = (params: ConfigEnv, configure?: Configure): UserConf
                 },
             },
             plugins: createPlugins(isBuild),
+            server: {
+                host: '127.0.0.1',
+            },
         },
         typeof configure === 'function' ? configure(params, isBuild) : {},
         {
