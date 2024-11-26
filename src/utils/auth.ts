@@ -1,4 +1,3 @@
-import { VITE_ENV_NAME } from '@/config/env';
 import { SIGNATURE_MESSAGE_KEY } from '@/constants';
 
 import {
@@ -54,18 +53,9 @@ const API_ENDPOINTS = {
  */
 export async function loginUser(data: LoginMutationData): Promise<LoginResponse> {
     try {
-        if (VITE_ENV_NAME === 'mock') {
-            return {
-                success: true,
-                message: 'Login successful',
-                token: 'sample_token_12345',
-            };
-        }
-        if (VITE_ENV_NAME === 'online') {
-            const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGIN, data);
-            return httpResponse.data;
-        }
-        throw new Error('Invalid environment');
+        const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGIN, data);
+
+        return httpResponse.data;
     } catch (error) {
         const authError = new Error('Login failed') as AuthError;
         authError.code = 'AUTH_LOGIN_FAILED';
@@ -79,19 +69,12 @@ export async function loginUser(data: LoginMutationData): Promise<LoginResponse>
  */
 export async function logoutUser({ token, user }: LogoutMutationData): Promise<LogoutResponse> {
     try {
-        if (VITE_ENV_NAME === 'mock') {
-            return {
-                message: 'Logout successful',
-            };
-        }
-        if (VITE_ENV_NAME === 'online') {
-            const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGOUT, {
-                token,
-                user,
-            });
-            return httpResponse.data;
-        }
-        throw new Error('Invalid environment');
+        const httpResponse = await httpClient.post<LoginResponse>(API_ENDPOINTS.LOGOUT, {
+            token,
+            user,
+        });
+
+        return httpResponse.data;
     } catch (error) {
         const authError = new Error('Logout failed') as AuthError;
         authError.code = 'AUTH_LOGOUT_FAILED';

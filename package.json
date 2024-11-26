@@ -4,8 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev:mock": "vite --port 10086 --mode mock",
-        "dev:online": "vite --port 10086 --mode online",
+        "dev": "vite --port 10086",
         "build": "tsc -b && vite build",
         "lint": "pnpm lint:es && pnpm lint:style",
         "lint:es": "eslint . --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",

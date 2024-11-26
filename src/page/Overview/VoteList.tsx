@@ -1,30 +1,21 @@
 import { Stack } from '@mui/material';
-
 import { FC, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import {
-    chitandaImg,
-    mashiroImg,
-    misakaImg,
-    rikkaImg,
-    shinomiyaImg,
-} from '@/assets/images/anime/2024/09';
-
 import AnimationButton from '@/components/Button/AnimationButton';
+import { NFTData, NFTId } from '@/types/nft';
 
-interface CharacterListType {
-    name: string;
-    imgUrl: string;
-    voteNum: number;
+interface CardListProps {
+    list: NFTData[];
+    onVote?: (nftId: NFTId) => void;
 }
 
-const CardList = forwardRef<HTMLDivElement, { list: CharacterListType[] }>(({ list }, ref) => {
+const CardList = forwardRef<HTMLDivElement, CardListProps>(({ list, onVote }, ref) => {
     return (
         <div ref={ref} className="tw-flex tw-flex-col tw-gap-6">
             {list.map((item) => {
                 return (
                     <Stack
-                        key={item.name}
+                        key={item.id}
                         className="tw-w-[28rem] tw-h-[36rem] tw-bg-white tw-rounded-md tw-shadow-md tw-p-2 tw-gap-2"
                     >
                         <Stack
@@ -33,8 +24,8 @@ const CardList = forwardRef<HTMLDivElement, { list: CharacterListType[] }>(({ li
                         >
                             <img
                                 className="tw-w-full tw-object-cover tw-object-center tw-transition-transform tw-duration-700 hover:tw-scale-105"
-                                src={item.imgUrl}
-                                alt={item.name}
+                                src={item.metadata.image}
+                                alt={item.metadata.name}
                             />
                         </Stack>
                         <Stack
@@ -42,10 +33,21 @@ const CardList = forwardRef<HTMLDivElement, { list: CharacterListType[] }>(({ li
                             direction="row"
                         >
                             <Stack spacing={1}>
-                                <span className="tw-text-xl tw-font-bold">{item.name}</span>
-                                <span className="tw-text-xs">Vote Number: {item.voteNum}</span>
+                                <span className="tw-text-xl tw-font-bold">
+                                    {item.metadata.name}
+                                </span>
+                                <span className="tw-text-xs">
+                                    Minted: {item.totalMinted.toString()}/
+                                    {item.maxSupply.toString()}
+                                </span>
+                                <span className="tw-text-xs">Price: {item.mintPrice} ETH</span>
                             </Stack>
-                            <AnimationButton h={12} w={36} text="Vote" />
+                            <AnimationButton
+                                h={12}
+                                w={36}
+                                text="Vote"
+                                onClick={() => onVote?.(item.id)}
+                            />
                         </Stack>
                     </Stack>
                 );
@@ -54,60 +56,42 @@ const CardList = forwardRef<HTMLDivElement, { list: CharacterListType[] }>(({ li
     );
 });
 
-const ThumbnailList = forwardRef<
-    HTMLDivElement,
-    { translateY: number; list: CharacterListType[]; onItemClick: (index: number) => void }
->(({ translateY, list, onItemClick }, ref) => {
-    const transform = useMemo(() => {
-        return `translateY(calc(calc(50vh - 6rem - 2.5rem) - ${translateY}px))`;
-    }, [translateY]);
+interface ThumbnailListProps {
+    translateY: number;
+    list: NFTData[];
+    onItemClick: (index: number) => void;
+}
 
-    return (
-        <div ref={ref} className="tw-flex tw-flex-col tw-gap-2 tw-px-2" style={{ transform }}>
-            {list.map((item, index) => {
-                return (
-                    <div
-                        key={item.name}
-                        className="tw-flex tw-h-20 tw-w-16 tw-bg-white tw-rounded-md tw-p-1 tw-text-center tw-pink-default tw-font-bold tw-shadow-md tw-cursor-pointer"
-                        onClick={() => onItemClick(index)}
-                    >
-                        <img src={item.imgUrl} alt={item.name} />
-                    </div>
-                );
-            })}
-        </div>
-    );
-});
+const ThumbnailList = forwardRef<HTMLDivElement, ThumbnailListProps>(
+    ({ translateY, list, onItemClick }, ref) => {
+        const transform = useMemo(() => {
+            return `translateY(calc(calc(50vh - 6rem - 2.5rem) - ${translateY}px))`;
+        }, [translateY]);
 
-const characterList = [
-    {
-        name: 'Eru Chitanda',
-        imgUrl: chitandaImg,
-        voteNum: 999,
+        return (
+            <div ref={ref} className="tw-flex tw-flex-col tw-gap-2 tw-px-2" style={{ transform }}>
+                {list.map((item, index) => {
+                    return (
+                        <div
+                            key={item.id}
+                            className="tw-flex tw-h-20 tw-w-16 tw-bg-white tw-rounded-md tw-p-1 tw-text-center tw-pink-default tw-font-bold tw-shadow-md tw-cursor-pointer"
+                            onClick={() => onItemClick(index)}
+                        >
+                            <img src={item.metadata.image} alt={item.metadata.name} />
+                        </div>
+                    );
+                })}
+            </div>
+        );
     },
-    {
-        name: 'Sakamoto Mashiro',
-        imgUrl: mashiroImg,
-        voteNum: 999,
-    },
-    {
-        name: 'Misaka Mikoto',
-        imgUrl: misakaImg,
-        voteNum: 999,
-    },
-    {
-        name: 'Rikka Takanashi',
-        imgUrl: rikkaImg,
-        voteNum: 999,
-    },
-    {
-        name: 'Shinomiya Kaguya',
-        imgUrl: shinomiyaImg,
-        voteNum: 999,
-    },
-];
+);
 
-const VoteList: FC = () => {
+interface VoteListProps {
+    nfts: NFTData[];
+    onVote?: (nftId: NFTId) => void;
+}
+
+const VoteList: FC<VoteListProps> = ({ nfts, onVote }) => {
     const [thumbnailTranslateY, setThumbnailTranslateY] = useState(0);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const cardListRef = useRef<HTMLDivElement>(null);
@@ -170,7 +154,7 @@ const VoteList: FC = () => {
         >
             <div className="tw-relative tw-m-auto tw-min-w-[80vw] tw-pt-10">
                 <div className="tw-flex tw-justify-center tw-py-6">
-                    <CardList ref={cardListRef} list={characterList} />
+                    <CardList ref={cardListRef} list={nfts} onVote={onVote} />
                 </div>
                 <div className="tw-sticky tw-flex tw-bottom-0 tw-h-0 tw-left-0 tw-z-10 tw-w-full">
                     <div className="tw-relative tw-flex tw-h-screen tw--translate-y-full">
@@ -178,7 +162,7 @@ const VoteList: FC = () => {
                             <ThumbnailList
                                 ref={thumbnailListRef}
                                 translateY={thumbnailTranslateY}
-                                list={characterList}
+                                list={nfts}
                                 onItemClick={scrollToItem}
                             />
                         </div>

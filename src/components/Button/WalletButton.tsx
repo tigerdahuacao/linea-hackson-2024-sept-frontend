@@ -1,11 +1,18 @@
 import { Stack } from '@mui/material';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { FC } from 'react';
 
 import { useAutoLogin } from '@/hooks/useAutoLogin';
 
 import CapsuleButton from './CapsuleButton';
 
-const WalletButton = () => {
+interface WalletButtonProps {
+    padding?: number | number[];
+    fontSize?: string;
+    className?: string;
+}
+
+const WalletButton: FC<WalletButtonProps> = ({ padding, fontSize, className }) => {
     const { isLoading } = useAutoLogin();
 
     return (
@@ -43,7 +50,9 @@ const WalletButton = () => {
                             if (!connected) {
                                 return (
                                     <CapsuleButton
-                                        className="tw-text-pink-default hover:tw-opacity-80 tw-transition-opacity"
+                                        padding={padding}
+                                        fontSize={fontSize}
+                                        className={`tw-text-pink-default hover:tw-opacity-80 tw-transition-opacity ${className || ''}`}
                                         onClick={openConnectModal}
                                     >
                                         Connect Wallet
@@ -53,7 +62,9 @@ const WalletButton = () => {
                             if (chain.unsupported) {
                                 return (
                                     <CapsuleButton
-                                        className="tw-text-red-500 hover:tw-opacity-80 tw-transition-opacity"
+                                        padding={padding}
+                                        fontSize={fontSize}
+                                        className={`tw-text-red-500 hover:tw-opacity-80 tw-transition-opacity ${className || ''}`}
                                         onClick={openConnectModal}
                                     >
                                         Wrong network
@@ -62,7 +73,12 @@ const WalletButton = () => {
                             }
                             return (
                                 <Stack direction="row" spacing={2}>
-                                    <CapsuleButton onClick={openChainModal}>
+                                    <CapsuleButton
+                                        padding={padding}
+                                        fontSize={fontSize}
+                                        className={className}
+                                        onClick={openChainModal}
+                                    >
                                         {chain.hasIcon && (
                                             <div
                                                 className="tw-h-4 tw-w-4 tw-rounded-full tw-overflow-hidden tw-mr-2"
@@ -82,7 +98,12 @@ const WalletButton = () => {
                                             {chain.name}
                                         </span>
                                     </CapsuleButton>
-                                    <CapsuleButton onClick={openAccountModal}>
+                                    <CapsuleButton
+                                        padding={padding}
+                                        fontSize={fontSize}
+                                        className={className}
+                                        onClick={openAccountModal}
+                                    >
                                         <Stack
                                             className="tw-text-xs tw-font-bold"
                                             direction="row"

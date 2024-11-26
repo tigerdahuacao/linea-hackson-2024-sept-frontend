@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import { Stack } from '@mui/material';
-import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -10,12 +10,13 @@ import { FC, useRef } from 'react';
 
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { WagmiProvider } from 'wagmi';
-import { mainnet, lineaSepolia, linea, lineaTestnet } from 'wagmi/chains';
+import { WagmiProvider, useAccount } from 'wagmi';
 
 import StoreButton from '@/components/Button/StoreButton';
 import WalletButton from '@/components/Button/WalletButton';
 import CapsuleTabs from '@/components/CapsuleTabs/CapsuleTabs';
+
+import { config } from '@/config/networks';
 
 import AppContainer from './AppContainer';
 
@@ -25,17 +26,17 @@ const tabs = [
         value: 'overview',
         path: '/',
     },
-    {
-        label: 'Vote',
-        value: 'vote',
-        path: '/vote-for-naruto',
-    },
-    // For show an display error
-    {
-        label: 'Vote-old',
-        value: 'vote-old',
-        path: '/vote-for-naruto-old',
-    },
+    // {
+    //     label: 'Vote',
+    //     value: 'vote',
+    //     path: '/vote-for-naruto',
+    // },
+    // // For show an display error
+    // {
+    //     label: 'Vote-old',
+    //     value: 'vote-old',
+    //     path: '/vote-for-naruto-old',
+    // },
     {
         label: 'Profile',
         value: 'profile',
@@ -43,13 +44,26 @@ const tabs = [
     },
 ];
 
-const config = getDefaultConfig({
-    appName: 'Hello Web3',
-    projectId: '11111',
-    chains: [mainnet, lineaSepolia, linea, lineaTestnet],
-});
-
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const Header: FC = () => {
+    const { isConnected } = useAccount();
+
+    if (!isConnected) return null;
+
+    return (
+        <Stack direction="row" className="tw-fixed tw-w-full tw-z-50 tw-justify-between tw-p-2">
+            <div className="tw-w-1/3" />
+            <Stack direction="row" className="tw-w-1/3 tw-justify-center">
+                <CapsuleTabs tabs={tabs} />
+            </Stack>
+            <Stack direction="row" spacing={2} className="tw-w-1/3 tw-items-center tw-justify-end">
+                <StoreButton />
+                <WalletButton />
+            </Stack>
+        </Stack>
+    );
+};
 
 const App: FC = () => {
     const queryClient = new QueryClient();
@@ -74,23 +88,7 @@ const App: FC = () => {
             <WagmiProvider config={config}>
                 <QueryClientProvider client={queryClient}>
                     <RainbowKitProvider>
-                        <Stack
-                            direction="row"
-                            className="tw-fixed tw-w-full tw-z-50 tw-justify-between tw-p-2"
-                        >
-                            <div className="tw-w-1/3" />
-                            <Stack direction="row" className="tw-w-1/3 tw-justify-center">
-                                <CapsuleTabs tabs={tabs} />
-                            </Stack>
-                            <Stack
-                                direction="row"
-                                spacing={2}
-                                className="tw-w-1/3 tw-items-center tw-justify-end"
-                            >
-                                <StoreButton />
-                                <WalletButton />
-                            </Stack>
-                        </Stack>
+                        <Header />
                         <Stack
                             ref={mainRef}
                             direction="row"

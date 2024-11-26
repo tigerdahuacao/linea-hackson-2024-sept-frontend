@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardMedia, CardContent } from '@mui/material';
+import { Badge, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
 const ProfileCard: FC<{
@@ -6,8 +6,9 @@ const ProfileCard: FC<{
     title?: string;
     content?: ReactNode;
     children?: ReactNode;
-}> = ({ imageUrl, title, content, children }) => {
-    return (
+    badgeContent?: string | number;
+}> = ({ imageUrl, title, content, children, badgeContent }) => {
+    const card = (
         <Card sx={{ boxShadow: 'none', borderRadius: '0.5rem' }}>
             {title && (
                 <CardHeader
@@ -25,6 +26,34 @@ const ProfileCard: FC<{
             {children}
         </Card>
     );
+
+    if (badgeContent) {
+        return (
+            <Badge
+                badgeContent={badgeContent}
+                color="default"
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                sx={{
+                    width: '100%',
+                    '& .MuiBadge-badge': {
+                        fontSize: '0.75rem',
+                        height: '1.5rem',
+                        minWidth: '1.5rem',
+                        borderRadius: '0.75rem',
+                        backgroundColor: '#e3e3e3',
+                        color: 'black',
+                    },
+                }}
+            >
+                {card}
+            </Badge>
+        );
+    }
+
+    return card;
 };
 
 export default ProfileCard;
